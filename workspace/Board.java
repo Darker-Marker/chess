@@ -9,6 +9,8 @@ import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.util.List;
+
 import javax.swing.*;
 
 //You will be implmenting a part of a function and a whole function in this document. Please follow the directions for the 
@@ -28,7 +30,14 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 	private static final String RESOURCES_WQUEEN_PNG = "wqueen.png";
 	private static final String RESOURCES_WPAWN_PNG = "wpawn.png";
 	private static final String RESOURCES_BPAWN_PNG = "bpawn.png";
-	
+    private static final String RESOURCES_WLASER_PNG = "wlaser.png";
+    private static final String RESOURCES_BLASER_PNG = "blaser.png";
+    private static final String RESOURCES_BSLIME_PNG = "blackSlime.png";
+    private static final String RESOURCES_WSLIME_PNG = "whiteSlime.png";
+    private static final String RESOURCES_BPOPE_PNG = "bpope.png";
+    private static final String RESOURCES_WPOPE_PNG = "wpope.png";
+    private static final String RESOURCES_BHELICOPTER_PNG = "bhelicopter.png";
+    private static final String RESOURCES_WHELICOPTER_PNG = "whelicopter.png";
 	// Logical and graphical representations of board
 	private final Square[][] board;
     private final GameWindow g;
@@ -96,55 +105,50 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 	//it's up to you how you wish to arrange your pieces.
     private void initializePieces() {
     	
-        //black 
-        board[0][0].put(new Piece(false, RESOURCES_BROOK_PNG));
-        board[0][1].put(new Piece(false, RESOURCES_BKNIGHT_PNG));
-        board[0][2].put(new Piece(false, RESOURCES_BBISHOP_PNG));
-        board[0][3].put(new Piece(false, RESOURCES_BQUEEN_PNG));
-    	board[0][4].put(new Piece(false, RESOURCES_BKING_PNG));
-        board[0][5].put(new Piece(false, RESOURCES_BBISHOP_PNG));
-        board[0][6].put(new Piece(false, RESOURCES_BKNIGHT_PNG));
-        board[0][7].put(new Piece(false, RESOURCES_BROOK_PNG));
+        //back line
+        board[0][0].put(new Laser(false, RESOURCES_BLASER_PNG));
+        board[0][1].put(new Helicopter(false, RESOURCES_BHELICOPTER_PNG));
+        board[0][2].put(new Pope(false, RESOURCES_BPOPE_PNG));
+        board[0][3].put(new Queen(false, RESOURCES_BQUEEN_PNG));
+        board[0][4].put(new King(false, RESOURCES_BKING_PNG));
+        board[0][5].put(new Pope(false, RESOURCES_BPOPE_PNG));
+        board[0][6].put(new Helicopter(false, RESOURCES_BHELICOPTER_PNG));
+        board[0][7].put(new Laser(false, RESOURCES_BLASER_PNG));
+        //front line
         
         
-        
-        //pawns
-        
-        
-        board[1][0].put(new Piece(false, RESOURCES_BPAWN_PNG));
-        board[1][1].put(new Piece(false, RESOURCES_BPAWN_PNG));
-        board[1][2].put(new Piece(false, RESOURCES_BPAWN_PNG));
-        board[1][3].put(new Piece(false, RESOURCES_BPAWN_PNG));
-        board[1][4].put(new Piece(false, RESOURCES_BPAWN_PNG));
-        board[1][5].put(new Piece(false, RESOURCES_BPAWN_PNG));
-        board[1][6].put(new Piece(false, RESOURCES_BPAWN_PNG));
-        board[1][7].put(new Piece(false, RESOURCES_BPAWN_PNG));
+        board[1][0].put(new Slime(false, RESOURCES_BSLIME_PNG));
+        board[1][1].put(new Slime(false, RESOURCES_BSLIME_PNG));
+        board[1][2].put(new Slime(false, RESOURCES_BSLIME_PNG));
+        board[1][3].put(new Slime(false, RESOURCES_BSLIME_PNG));
+        board[1][4].put(new Slime(false, RESOURCES_BSLIME_PNG));
+        board[1][5].put(new Slime(false, RESOURCES_BSLIME_PNG));
+        board[1][6].put(new Slime(false, RESOURCES_BSLIME_PNG));
+        board[1][7].put(new Slime(false, RESOURCES_BSLIME_PNG));
 
 
 
         //white:
-        board[7][0].put(new Piece(true, RESOURCES_WROOK_PNG));
-        board[7][1].put(new Piece(true, RESOURCES_WKNIGHT_PNG));
-        board[7][2].put(new Piece(true, RESOURCES_WBISHOP_PNG));
-        board[7][3].put(new Piece(true, RESOURCES_WQUEEN_PNG));
-    	board[7][4].put(new Piece(true, RESOURCES_WKING_PNG));
-        board[7][5].put(new Piece(true, RESOURCES_WBISHOP_PNG));
-        board[7][6].put(new Piece(true, RESOURCES_WKNIGHT_PNG));
-        board[7][7].put(new Piece(true, RESOURCES_WROOK_PNG));
+        //back line
+        board[7][0].put(new Laser(true, RESOURCES_WLASER_PNG));
+        board[7][1].put(new Helicopter(true, RESOURCES_WHELICOPTER_PNG));
+        board[7][2].put(new Pope(true, RESOURCES_WPOPE_PNG));
+        board[7][3].put(new Queen(true, RESOURCES_WQUEEN_PNG));
+        board[7][4].put(new King(true, RESOURCES_WKING_PNG));
+        board[7][5].put(new Pope(true, RESOURCES_WPOPE_PNG));
+        board[7][6].put(new Helicopter(false, RESOURCES_WHELICOPTER_PNG));
+        board[7][7].put(new Laser(true, RESOURCES_WLASER_PNG));
+        //front line
         
         
-        
-        //pawns
-        
-        
-        board[6][0].put(new Piece(true, RESOURCES_WPAWN_PNG));
-        board[6][1].put(new Piece(true, RESOURCES_WPAWN_PNG));
-        board[6][2].put(new Piece(true, RESOURCES_WPAWN_PNG));
-        board[6][3].put(new Piece(true, RESOURCES_WPAWN_PNG));
-        board[6][4].put(new Piece(true, RESOURCES_WPAWN_PNG));
-        board[6][5].put(new Piece(true, RESOURCES_WPAWN_PNG));
-        board[6][6].put(new Piece(true, RESOURCES_WPAWN_PNG));
-        board[6][7].put(new Piece(true, RESOURCES_WPAWN_PNG));
+        board[6][0].put(new Slime(true, RESOURCES_WSLIME_PNG));
+        board[6][1].put(new Slime(true, RESOURCES_WSLIME_PNG));
+        board[6][2].put(new Slime(true, RESOURCES_WSLIME_PNG));
+        board[6][3].put(new Slime(true, RESOURCES_WSLIME_PNG));
+        board[6][4].put(new Slime(true, RESOURCES_WSLIME_PNG));
+        board[6][5].put(new Slime(true, RESOURCES_WSLIME_PNG));
+        board[6][6].put(new Slime(true, RESOURCES_WSLIME_PNG));
+        board[6][7].put(new Slime(true, RESOURCES_WSLIME_PNG));
 
     }
 
@@ -177,8 +181,7 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
             }
         }
     	if (currPiece != null) {
-            if ((currPiece.getColor() && whiteTurn)
-                    || (!currPiece.getColor()&& !whiteTurn)) {
+            if ((currPiece.getColor() && whiteTurn) || (!currPiece.getColor()&& !whiteTurn)) {
                 final Image img = currPiece.getImage();
                 g.drawImage(img, currX, currY, null);
             }
@@ -204,7 +207,42 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
         }
         repaint();
     }
+public boolean isInCheck(boolean color) {
+    // Loop through the board to find the king of the specified color
+    Square kingSquare = null;
+    for (int row = 0; row < 8; row++) {
+        for (int col = 0; col < 8; col++) {
+            Piece piece = board[row][col].getOccupyingPiece();
+            if (piece instanceof King && piece.getColor() == color) {
+                kingSquare = board[row][col];
+                break;
+            }
+        }
+        if (kingSquare != null) break;
+    }
+    
+    if (kingSquare == null) {
+        return false; // No king found (shouldn't happen in normal chess)
+    }
 
+    // Loop through all opponent pieces and check if they control the king's square
+    for (int row = 0; row < 8; row++) {
+        for (int col = 0; col < 8; col++) {
+            Piece piece = board[row][col].getOccupyingPiece();
+            // Check if the piece exists and is of the opponent's color
+            if (piece != null && piece.getColor() != color) {
+                // Get all squares this piece controls
+                List<Square> controlledSquares = piece.getLegalMoves(this, board[row][col]);
+                // Check if any controlled square is the king's square
+                if (controlledSquares.contains(kingSquare)) {
+                    return true;
+                }
+            }
+        }
+    }
+    
+    return false;
+}
     //TO BE IMPLEMENTED!
     //should move the piece to the desired location only if this is a legal move.
     //use the pieces "legal move" function to determine if this move is legal, then complete it by
@@ -213,9 +251,52 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
     public void mouseReleased(MouseEvent e) {
         Square endSquare = (Square) this.getComponentAt(new Point(e.getX(), e.getY()));
         
-        //using currPiece
+        if (currPiece != null && currPiece.getColor() == whiteTurn) {
+            List<Square> legalMoves = currPiece.getLegalMoves(this, fromMoveSquare);
+            if (legalMoves.contains(endSquare)) {
+                // Save original state of squares
+                Piece originalFromPiece = fromMoveSquare.getOccupyingPiece();
+                Piece originalToPiece = endSquare.getOccupyingPiece();
+                boolean isLaser = originalFromPiece instanceof Laser;
+                int originalCol = fromMoveSquare.getCol();
+                int newCol = endSquare.getCol();
+                
+                // Simulate the move
+                fromMoveSquare.removePiece();
+                endSquare.put(originalFromPiece);
+                
+                // Handle Laser special case during simulation
+                if (isLaser && originalCol == newCol) {
+                    fromMoveSquare.put(originalFromPiece);
+                    endSquare.removePiece();
+                }
+                
+                // Check if the move puts the current player in check
+                boolean inCheckAfterMove = isInCheck(whiteTurn);
+                
+                // Undo simulation
+                if (isLaser && originalCol == newCol) {
+                    endSquare.put(originalToPiece);
+                } else {
+                    fromMoveSquare.put(originalFromPiece);
+                    endSquare.put(originalToPiece);
+                }
+                
+                // Proceed only if not in check after the move
+                if (!inCheckAfterMove) {
+                    fromMoveSquare.removePiece();
+                    endSquare.put(originalFromPiece);
+                    whiteTurn = !whiteTurn;
+                    
+                    // Handle Laser special case after actual move
+                    if (isLaser && endSquare.getCol() == fromMoveSquare.getCol()) {
+                        fromMoveSquare.put(originalFromPiece);
+                        endSquare.removePiece();
+                    }
+                }
+            }
+        }
         
-       
         fromMoveSquare.setDisplay(true);
         currPiece = null;
         repaint();
@@ -225,6 +306,12 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
     public void mouseDragged(MouseEvent e) {
         currX = e.getX() - 24;
         currY = e.getY() - 24;
+        if(currPiece!= null){
+            for(Square s: currPiece.getLegalMoves(this, fromMoveSquare)){
+                s.setBorder(BorderFactory.createLineBorder(Color.red));
+            }
+        }
+
 
         repaint();
     }
